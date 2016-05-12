@@ -12,7 +12,17 @@ import java.net.URL;
  * Created by bkmr38 on 5/10/2016.
  */
 public class HttpUtility {
-    public static String GetRequest(String url, String para) {
+
+    private static String urlBase="http://yxzhm.com/api/DP/";
+    public static boolean ValidateUser(String name,String password){
+        String url=urlBase+"Login";
+        String para=String.format("loginname=%s&password=%s",name,password);
+
+        boolean result=Boolean.valueOf(PostRequest(url,para));
+        return result;
+    }
+
+    private static String GetRequest(String url, String para) {
 
         try {
             URL u = new URL(url + "?" + para);
@@ -29,7 +39,7 @@ public class HttpUtility {
         return "";
     }
 
-    public static String PostRequest(String url, String para) {
+    private static String PostRequest(String url, String para) {
         try {
             URL u = new URL(url);
             byte[] data = para.getBytes("UTF-8");
