@@ -93,7 +93,6 @@ public class HttpUtility {
 
     }
 
-
     private static String getContent(InputStream stream) throws IOException {
         InputStreamReader in = new InputStreamReader(stream);
         BufferedReader buff = new BufferedReader(in);

@@ -1,6 +1,7 @@
 package com.mot.AndroidDP;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +46,10 @@ public class Login extends Activity {
                 if(result){
                     GlobalPara.UserName=user;
                     GlobalPara.PSW=password;
-                    Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent();
+                    i.setClass(Login.this,AndroidDP.class);
+                    startActivity(i);
+                    //Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Incorrect User Name or Password",Toast.LENGTH_SHORT).show();
