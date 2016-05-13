@@ -31,8 +31,11 @@ public class Login extends Activity {
         userName=(EditText)findViewById(R.id.username);
         userPassword=(EditText)findViewById(R.id.password);
 
-        loginButton.setOnClickListener(new View.OnClickListener(){
+        userName.setText("cps");
+        userPassword.setText("cps");
 
+
+        loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String user=userName.getText().toString();
@@ -40,10 +43,12 @@ public class Login extends Activity {
 
                 boolean result=HttpUtility.ValidateUser(user,password);
                 if(result){
+                    GlobalPara.UserName=user;
+                    GlobalPara.PSW=password;
                     Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Incorrect User Name or Password",Toast.LENGTH_SHORT).show();
                 }
             }
         });

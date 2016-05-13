@@ -13,54 +13,84 @@ import java.net.URL;
  */
 public class HttpUtility {
 
-    private static String urlBase="http://yxzhm.com/api/DP/";
-    public static boolean ValidateUser(String name,String password){
-        String url=urlBase+"Login";
-        String para=String.format("loginname=%s&password=%s",name,password);
+    private static String urlBase = "http://yxzhm.com/api/DP/";
 
-        boolean result=Boolean.valueOf(PostRequest(url,para));
+    public static boolean ValidateUser(String name, String password) {
+        String url = urlBase + "Login";
+        String para = String.format("loginname=%s&password=%s", name, password);
+
+        boolean result = Boolean.valueOf(PostRequest(url, para));
         return result;
     }
 
+    static String resultStr = "";
+
     private static String GetRequest(String url, String para) {
 
-        try {
-            URL u = new URL(url + "?" + para);
-            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-            String context=getContent((InputStream) conn.getContent());
-            return context;
+        Thread webThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL u = new URL(url + "?" + para);
+                    HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.connect();
+                    resultStr = getContent((InputStream) conn.getContent());
 
-        } catch (IOException e) {
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        webThread.start();
+        try {
+            webThread.join();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        return "";
+        return resultStr;
     }
 
     private static String PostRequest(String url, String para) {
-        try {
-            URL u = new URL(url);
-            byte[] data = para.getBytes("UTF-8");
-            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-            conn.setRequestProperty("Accept", "*/*");
-            conn.setRequestProperty("UserAgent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
-            conn.setRequestProperty("ContentType", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", Integer.toString(data.length));
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
 
-            conn.getOutputStream().write(data);
-            int code = conn.getResponseCode();
-            String content = getContent(conn.getInputStream());
-            return content;
-        }
-        catch (Exception e){
+        Thread webThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL u = new URL(url);
+                    byte[] data = para.getBytes("UTF-8");
+                    HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+                    //conn.setRequestProperty("Accept", "*/*");
+                    //conn.setRequestProperty("UserAgent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    conn.setRequestProperty("Content-Length", Integer.toString(data.length));
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+
+                    conn.getOutputStream().write(data);
+                    int code = conn.getResponseCode();
+                    resultStr = getContent(conn.getInputStream());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        try {
+            webThread.start();
+            webThread.join();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "";
+
+        return resultStr;
+
+
     }
 
 
@@ -74,7 +104,7 @@ public class HttpUtility {
             do {
                 line = buff.readLine();
                 if (line != null) {
-                    contentBuffer.append(line + "\r\n");
+                    contentBuffer.append(line);
                 }
             } while (line != null);
         } catch (Exception ex) {
