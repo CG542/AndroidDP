@@ -2,13 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical" >
+              android:orientation="vertical">
+    <RelativeLayout android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center">
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:text="Deploy"
-            android:textColor="#000000" />
+        <FrameLayout
+                android:id="@+id/dploydp_layout"
+                style="@style/deploy_frameLayout_style"
+                >
+            <TextView
+                    android:id="@+id/deploy_label_dpname"
+                    style="@style/deploy_textview_style"
+                    android:text="DP Name:"
+            />
 
+            <Spinner
+                    android:id="@+id/deploy_dpname"
+                    style="@style/deploy_spinner_style"
+                    />
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/dployprofile_layout"
+                style="@style/deploy_frameLayout_style"
+                android:layout_below="@id/dploydp_layout"
+                >
+            <TextView
+                    android:id="@+id/deploy_label_profilename"
+                    style="@style/deploy_textview_style"
+                    android:text="Profile Name:"
+            />
+
+            <Spinner
+                    android:id="@+id/deploy_profilename"
+                    style="@style/deploy_spinner_style"
+            />
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/dploybutton_layout"
+                style="@style/deploy_frameLayout_style"
+                android:layout_below="@id/dployprofile_layout"
+                >
+            <Button
+                    android:id="@+id/deploy_deploybutton"
+                    android:layout_below="@id/dployprofile_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text=" Deploy "
+            />
+        </FrameLayout>
+
+    </RelativeLayout>
 </LinearLayout>

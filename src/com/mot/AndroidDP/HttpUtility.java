@@ -1,12 +1,18 @@
 package com.mot.AndroidDP;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bkmr38 on 5/10/2016.
@@ -21,6 +27,55 @@ public class HttpUtility {
 
         boolean result = Boolean.valueOf(PostRequest(url, para));
         return result;
+    }
+
+    public static List<String> GetAllDPNames(){
+        String url=urlBase+"GetAllDPNames";
+        String para=String.format("loginname=%s&password=%s", GlobalPara.UserName, GlobalPara.PSW);
+
+        List<String> list=new ArrayList<>();
+
+        String result = GetRequest(url, para);
+        try {
+            JSONObject js=new JSONObject(result);
+            JSONArray jsArray=js.optJSONArray("DP");
+            for (int i=0;i<jsArray.length();i++){
+                JSONObject temp = (JSONObject)jsArray.get(i);
+                list.add(temp.optString("name"));
+            }
+           System.out.print(js.length());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<String> GetAllSettings(){
+        String url=urlBase+"GetAllSettings";
+        String para=String.format("loginname=%s&password=%s", GlobalPara.UserName, GlobalPara.PSW);
+
+        List<String> list=new ArrayList<>();
+
+        String result = GetRequest(url, para);
+        try {
+            JSONObject js=new JSONObject(result);
+            JSONArray jsArray=js.optJSONArray("settingEntity");
+            for (int i=0;i<jsArray.length();i++){
+                JSONObject temp = (JSONObject)jsArray.get(i);
+                list.add(temp.optString("profilename"));
+            }
+            System.out.print(js.length());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void SetDPConfig(String dpName,String profileName){
+        String url=urlBase+"SetDPConfig";
+        String para = String.format("loginname=%s&password=%s&dpname=%s&profilename=%s"
+                , GlobalPara.UserName, GlobalPara.PSW,dpName,profileName);
+        PostRequest(url, para);
     }
 
     static String resultStr = "";
