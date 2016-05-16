@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:background="#ffffff"
 >
-    <TextView
+    <fragment
+            android:id="@+id/fragement_status"
+            android:name="com.mot.AndroidDP.FragementStatus"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="50" tools:layout="@layout/status"/>
+
+    <fragment
+            android:id="@+id/fragement_deploy"
+            android:name="com.mot.AndroidDP.FragementDeploy"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="50" tools:layout="@layout/deploy"/>
+
+    <fragment
+            android:id="@+id/fragement_setting"
+            android:name="com.mot.AndroidDP.FragementSetting"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="50" tools:layout="@layout/setting"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#BFBFBF" >
+    </View>
+    <RadioGroup
+            android:id="@+id/bottomRg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World, AndroidDP"
-    />
+            android:layout_weight="0.5"
+            android:orientation="horizontal" >
+
+        <RadioButton
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/rbOne"
+                style="@style/rg_btn_style"
+                android:checked="true"
+                android:drawableTop="@drawable/rb_one_btn_selector"
+                android:textColor="@drawable/textcolor_selector"
+                android:text="Status" />
+
+        <RadioButton
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/rbTwo"
+                style="@style/rg_btn_style"
+                android:drawableTop="@drawable/rb_two_btn_selector"
+                android:textColor="@drawable/textcolor_selector"
+                android:text="Deployment" />
+        <RadioButton
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/rbThree"
+                style="@style/rg_btn_style"
+                android:drawableTop="@drawable/rb_three_btn_selector"
+                android:textColor="@drawable/textcolor_selector"
+                android:text="Setting" />
+    </RadioGroup>
 </LinearLayout>
 
