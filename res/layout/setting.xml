@@ -2,13 +2,193 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical" >
+              android:orientation="vertical"
+              android:background="#ffefebe7"
+>
 
-    <TextView
+    <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:gravity="center"
-            android:text="Setting"
-            android:textColor="#000000" />
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:orientation="vertical"
+    >
+        <!--RM Server-->
+        <TextView
+                style="@style/setting_title_textview_style"
+                android:text="RM Server"
+        />
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <TableLayout
+                    style="@style/setting_tablelayout_style"
+            >
+
+                <TableRow
+                        style="@style/setting_tablerow_style"
+                >
+
+                    <TextView
+                            style="@style/setting_lable_textview_style"
+                            android:text="Address"
+                    />
+                    <EditText
+                            style="@style/setting_setting_edittext_style"
+                    />
+
+                </TableRow>
+
+                <TableRow
+                        style="@style/setting_tablerow_style"
+                >
+
+                    <TextView
+                            style="@style/setting_lable_textview_style"
+                            android:text="Port"
+                    />
+                    <EditText
+                            style="@style/setting_setting_edittext_style"
+                    />
+
+                </TableRow>
+
+                <TableRow
+                        style="@style/setting_tablerow_style"
+                >
+
+                    <TextView
+                            style="@style/setting_lable_textview_style"
+                            android:text="Auth Method"
+                    />
+                    <Spinner
+                            style="@style/setting_setting_edittext_style"
+                    />
+
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+
+        <View style="@style/spilte_line_style"/>
+
+        <!--Device Communication Method-->
+        <TextView
+                style="@style/setting_title_textview_style"
+                android:text="Device Communication Method"
+        />
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <TableLayout
+                    style="@style/setting_tablelayout_style"
+            >
+
+                <TableRow
+                        style="@style/setting_tablerow_style"
+                >
+
+                    <TextView
+                            style="@style/setting_lable_textview_style"
+                            android:text="Communication Method"
+                    />
+                    <CheckBox
+                            style="@style/setting_setting_checkbox_style"
+                            android:text="USB"
+                    />
+                    <CheckBox
+                            style="@style/setting_setting_checkbox_style"
+                            android:text="Wireless(LAN)"
+                    />
+                    <CheckBox
+                            style="@style/setting_setting_checkbox_style"
+                            android:text="Over the air"
+                    />
+
+                </TableRow>
+
+
+            </TableLayout>
+        </LinearLayout>
+
+        <View style="@style/spilte_line_style"/>
+
+        <!--Job Settings-->
+        <TextView
+                style="@style/setting_title_textview_style"
+                android:text="Job Settings"
+        />
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <TableLayout
+                    style="@style/setting_tablelayout_style"
+            >
+
+                <TableRow
+                        style="@style/setting_tablerow_style"
+                >
+
+                    <TextView
+                            style="@style/setting_lable_textview_style"
+                            android:text="Auto Process Jobs"
+                    />
+                    <CheckBox
+                            style="@style/setting_setting_checkbox_style"
+                    />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+        <View style="@style/spilte_line_style"/>
+
+        <!--Settings Profile-->
+        <TextView
+                style="@style/setting_title_textview_style"
+                android:text="Setting Profile"
+        />
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <TableLayout
+                    style="@style/setting_tablelayout_style"
+            >
+
+                <TableRow
+                        style="@style/setting_tablerow_style"
+                >
+
+                    <TextView
+                            style="@style/setting_lable_textview_style"
+                            android:text="Profile Name"
+                    />
+                    <EditText
+                            style="@style/setting_setting_edittext_style"
+                    />
+                </TableRow>
+
+                <TableRow
+                        style="@style/setting_tablerow_style"
+                >
+                    <Button
+                            style="@style/setting_button_style"
+                            android:text="Save"
+                    />
+
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

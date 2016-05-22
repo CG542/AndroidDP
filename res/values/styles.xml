@@ -35,4 +35,63 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="setting_title_textview_style">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">10dip</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">4dip</item>
+        <item name="android:textColor">#ff888888</item>
+        <item name="android:textSize">26.0sp</item>
+    </style>
+
+    <style name="setting_tablelayout_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">1dip</item>
+    </style>
+
+    <style name="setting_tablerow_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">2dip</item>
+        <item name="android:paddingBottom">16dip</item>
+        <item name="android:paddingTop">16dip</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="setting_lable_textview_style">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:paddingLeft">18dp</item>
+        <item name="android:textColor">#ff333333</item>
+    </style>
+
+    <style name="setting_setting_edittext_style">
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
+    <style name="setting_setting_checkbox_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+
+    <style name="spilte_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#BFBFBF</item>
+    </style>
+
+    <style name="setting_button_style">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
 </resources>

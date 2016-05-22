@@ -26,11 +26,8 @@
             android:layout_height="fill_parent"
             android:layout_weight="50" tools:layout="@layout/setting"/>
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#BFBFBF" >
-    </View>
+    <View style="@style/spilte_line_style"/>
+
     <RadioGroup
             android:id="@+id/bottomRg"
             android:layout_width="fill_parent"
@@ -63,7 +60,7 @@
                 style="@style/rg_btn_style"
                 android:drawableTop="@drawable/rb_three_btn_selector"
                 android:textColor="@drawable/textcolor_selector"
-                android:text="Setting" />
+                android:text="Settings" />
     </RadioGroup>
 </LinearLayout>
 
