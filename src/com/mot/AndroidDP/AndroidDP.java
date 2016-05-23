@@ -64,6 +64,7 @@ public class AndroidDP extends Activity {
                         break;
 
                     case R.id.rbTwo:
+                        ((FragementDeploy)fragments[1]).refreshData();
                         fragmentTran.show(fragments[1]).commit();
                         break;
 

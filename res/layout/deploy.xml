@@ -52,9 +52,10 @@
             <Button
                     android:id="@+id/deploy_deploybutton"
                     android:layout_below="@id/dployprofile_layout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
+
                     android:text=" Deploy "
             />
         </FrameLayout>

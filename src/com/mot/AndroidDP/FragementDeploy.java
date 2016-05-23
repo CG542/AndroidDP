@@ -46,6 +46,11 @@ public class FragementDeploy extends Fragment {
         });
     }
 
+    public void refreshData(){
+        getDPNames();
+        getProfileNames();
+    }
+
     private void getDPNames(){
         ArrayList<CharSequence> data = new ArrayList<CharSequence>();
 
@@ -53,8 +58,8 @@ public class FragementDeploy extends Fragment {
         for(String s : webResult){
             data.add(s);
         }
-        ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(getView().getContext(),android.R.layout.simple_spinner_dropdown_item,data);
-
+        ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(getView().getContext(),android.R.layout.simple_spinner_item,data);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dpSpinner.setAdapter(adapter);
         dpSpinner.setSelection(0);
         dpSpinner.setVisibility(View.VISIBLE);
@@ -67,8 +72,8 @@ public class FragementDeploy extends Fragment {
         for(String s : webResult){
             data.add(s);
         }
-        ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(getView().getContext(),android.R.layout.simple_spinner_dropdown_item,data);
-
+        ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(getView().getContext(),android.R.layout.simple_spinner_item,data);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         profileSpinner.setAdapter(adapter);
         profileSpinner.setSelection(0);
         profileSpinner.setVisibility(View.VISIBLE);

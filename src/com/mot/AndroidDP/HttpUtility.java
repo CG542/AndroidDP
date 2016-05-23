@@ -78,6 +78,13 @@ public class HttpUtility {
         PostRequest(url, para);
     }
 
+    public static void UploadSetting(String profileName,String setting){
+        String url=urlBase+"UploadSetting";
+        String para = String.format("loginname=%s&password=%s&profilename=%s&setting=%s"
+                , GlobalPara.UserName, GlobalPara.PSW,profileName,setting);
+        PostRequest(url, para);
+    }
+
     static String resultStr = "";
 
     private static String GetRequest(String url, String para) {

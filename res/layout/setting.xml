@@ -26,52 +26,42 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <TableLayout
-                    style="@style/setting_tablelayout_style"
-            >
+            <TableLayout style="@style/setting_tablelayout_style">
 
-                <TableRow
-                        style="@style/setting_tablerow_style"
-                >
-
+                <TableRow style="@style/setting_tablerow_style">
                     <TextView
                             style="@style/setting_lable_textview_style"
                             android:text="Address"
                     />
                     <EditText
+                            android:id="@+id/setting_addressEdit"
                             style="@style/setting_setting_edittext_style"
                     />
 
                 </TableRow>
 
-                <TableRow
-                        style="@style/setting_tablerow_style"
-                >
-
+                <TableRow style="@style/setting_tablerow_style">
                     <TextView
                             style="@style/setting_lable_textview_style"
                             android:text="Port"
                     />
                     <EditText
+                            android:id="@+id/setting_portEdit"
                             style="@style/setting_setting_edittext_style"
                     />
 
                 </TableRow>
 
-                <TableRow
-                        style="@style/setting_tablerow_style"
-                >
-
+                <TableRow style="@style/setting_tablerow_style">
                     <TextView
                             style="@style/setting_lable_textview_style"
                             android:text="Auth Method"
                     />
                     <Spinner
+                            android:id="@+id/setting_authMethodSpinner"
                             style="@style/setting_setting_edittext_style"
                     />
-
                 </TableRow>
-
             </TableLayout>
         </LinearLayout>
 
@@ -87,33 +77,29 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <TableLayout
-                    style="@style/setting_tablelayout_style"
-            >
-
-                <TableRow
-                        style="@style/setting_tablerow_style"
-                >
-
+            <TableLayout style="@style/setting_tablelayout_style">
+                <TableRow style="@style/setting_tablerow_style">
                     <TextView
                             style="@style/setting_lable_textview_style"
                             android:text="Communication Method"
                     />
                     <CheckBox
+                            android:id="@+id/setting_usbCheckbox"
                             style="@style/setting_setting_checkbox_style"
                             android:text="USB"
                     />
                     <CheckBox
+                            android:id="@+id/setting_lanCheckbox"
                             style="@style/setting_setting_checkbox_style"
                             android:text="Wireless(LAN)"
                     />
                     <CheckBox
+                            android:id="@+id/setting_overTheAirCheckbox"
                             style="@style/setting_setting_checkbox_style"
                             android:text="Over the air"
                     />
 
                 </TableRow>
-
 
             </TableLayout>
         </LinearLayout>
@@ -130,24 +116,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <TableLayout
-                    style="@style/setting_tablelayout_style"
-            >
-
-                <TableRow
-                        style="@style/setting_tablerow_style"
-                >
-
+            <TableLayout style="@style/setting_tablelayout_style">
+                <TableRow style="@style/setting_tablerow_style">
                     <TextView
                             style="@style/setting_lable_textview_style"
                             android:text="Auto Process Jobs"
                     />
                     <CheckBox
+                            android:id="@+id/setting_autoProcessCheckbox"
                             style="@style/setting_setting_checkbox_style"
                     />
                 </TableRow>
             </TableLayout>
         </LinearLayout>
+
         <View style="@style/spilte_line_style"/>
 
         <!--Settings Profile-->
@@ -160,30 +142,37 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <TableLayout
-                    style="@style/setting_tablelayout_style"
-            >
-
-                <TableRow
-                        style="@style/setting_tablerow_style"
-                >
-
+            <TableLayout style="@style/setting_tablelayout_style">
+                <TableRow style="@style/setting_tablerow_style">
                     <TextView
                             style="@style/setting_lable_textview_style"
                             android:text="Profile Name"
                     />
                     <EditText
+                            android:id="@+id/setting_profileNameEdit"
                             style="@style/setting_setting_edittext_style"
                     />
                 </TableRow>
+            </TableLayout>
+        </LinearLayout>
 
+
+        <!--Save Button-->
+
+        <LinearLayout
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <TableLayout style="@style/setting_tablelayout_style">
                 <TableRow
-                        style="@style/setting_tablerow_style"
+                style="@style/setting_tablerow_style"
                 >
-                    <Button
-                            style="@style/setting_button_style"
-                            android:text="Save"
-                    />
+                <Button
+                        android:id="@+id/setting_saveButton"
+                style="@style/setting_button_style"
+                android:text="Save"
+                />
 
                 </TableRow>
             </TableLayout>
