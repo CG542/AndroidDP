@@ -45,9 +45,24 @@
         </FrameLayout>
 
         <FrameLayout
-                android:id="@+id/dploybutton_layout"
+                android:id="@+id/refreshbutton_layout"
                 style="@style/deploy_frameLayout_style"
                 android:layout_below="@id/dployprofile_layout"
+        >
+            <Button
+                    android:id="@+id/deploy_refreshbutton"
+                    android:layout_below="@id/dployprofile_layout"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+
+                    android:text=" Refresh "
+            />
+        </FrameLayout>
+        <FrameLayout
+                android:id="@+id/dploybutton_layout"
+                style="@style/deploy_frameLayout_style"
+                android:layout_below="@id/refreshbutton_layout"
                 >
             <Button
                     android:id="@+id/deploy_deploybutton"

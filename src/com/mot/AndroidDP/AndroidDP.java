@@ -9,6 +9,30 @@ import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+//                            _ooOoo_
+//                           o8888888o
+//                           88" . "88
+//                           (| -_- |)
+//                            O\ = /O
+//                        ____/`---'\____
+//                      .   ' \\| |// `.
+//                       / \\||| : |||// \
+//                     / _||||| -:- |||||- \
+//                       | | \\\ - /// | |
+//                     | \_| ''\---/'' | |
+//                      \ .-\__ `-` ___/-. /
+//                   ___`. .' /--.--\ `. . __
+//                ."" '< `.___\_<|>_/___.' >'"".
+//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+//                 \ \ `-. \_ __\ /__ _/ .-` / /
+//         ======`-.____`-.___\_____/___.-`____.-'======
+//                            `=---='
+//
+//         .............................................
+//                  佛祖保佑             永无BUG
+//
+//
+//
 public class AndroidDP extends Activity {
 
     private Fragment[] fragments;
@@ -64,7 +88,6 @@ public class AndroidDP extends Activity {
                         break;
 
                     case R.id.rbTwo:
-                        ((FragementDeploy)fragments[1]).refreshData();
                         fragmentTran.show(fragments[1]).commit();
                         break;
 

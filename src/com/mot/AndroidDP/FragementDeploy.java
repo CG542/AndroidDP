@@ -19,6 +19,7 @@ public class FragementDeploy extends Fragment {
     private Spinner dpSpinner;
     private Spinner profileSpinner;
     private Button deploy;
+    private Button refresh;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class FragementDeploy extends Fragment {
         dpSpinner=(Spinner)getView().findViewById(R.id.deploy_dpname);
         profileSpinner=(Spinner)getView().findViewById(R.id.deploy_profilename);
         deploy=(Button)getView().findViewById(R.id.deploy_deploybutton);
-
+        refresh=(Button)getView().findViewById(R.id.deploy_refreshbutton);
         getDPNames();
         getProfileNames();
 
@@ -42,6 +43,14 @@ public class FragementDeploy extends Fragment {
                 String dpName=dpSpinner.getSelectedItem().toString();
                 String profileName=profileSpinner.getSelectedItem().toString();
                 HttpUtility.SetDPConfig(dpName,profileName);
+            }
+        });
+
+        refresh.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                refreshData();
             }
         });
     }
