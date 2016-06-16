@@ -4,7 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -51,6 +56,28 @@ public class AndroidDP extends Activity {
 
         setupFragments();
         setupIndicator();
+
+        Intent intent = new Intent(AndroidDP.this,StatusListener.class);
+        registerBroadcastReceiver();
+        startService(intent);
+
+    }
+
+    private void registerBroadcastReceiver(){
+        StatusReceiver receiver = new StatusReceiver();
+        IntentFilter filter = new IntentFilter(GlobalPara.Status_Changed_Action);
+        registerReceiver(receiver,filter);
+    }
+    public  class StatusReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(GlobalPara.Status_Changed_Action)) {
+                Log.i("StatusReceiver","LoadData");
+                ((FragementStatus)fragments[0]).LoadData();
+            }
+        }
     }
 
     private void setupFragments() {

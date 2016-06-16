@@ -5,11 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Timer;
 
 /**
  * Created by bkmr38 on 5/16/2016.
  */
 public class FragementStatus extends Fragment {
+    ListView statusList;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.status, container, false);
@@ -18,5 +26,21 @@ public class FragementStatus extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        statusList=(ListView)getView().findViewById(R.id.listView);
+        LoadData();
+    }
+    static int n=0;
+    public void LoadData(){
+        ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
+        for(int i=0;i<4;i++)
+        {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("ItemTitle", "This is Title.....");
+            String temp =Integer.toString(n++);
+            map.put("ItemText", temp);
+            mylist.add(map);
+        }
+        SimpleAdapter mSchedule = new SimpleAdapter(getView().getContext(), mylist, R.layout.my_listitem, new String[] {"ItemTitle", "ItemText"}, new int[] {R.id.ItemTitle,R.id.ItemText});
+        statusList.setAdapter(mSchedule);
     }
 }

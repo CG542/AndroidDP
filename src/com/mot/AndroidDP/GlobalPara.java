@@ -6,4 +6,6 @@ package com.mot.AndroidDP;
 public class GlobalPara {
     public static String UserName;
     public static String PSW;
+
+    public static String Status_Changed_Action="com.mot.Status_Changed";
 }
