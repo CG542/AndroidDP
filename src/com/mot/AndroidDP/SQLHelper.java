@@ -22,7 +22,7 @@ public class SQLHelper extends SQLiteOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE status (id INTERGE primary key autocreame, dpname text, status text, logtime text);";
+        String sql = "CREATE status (id INTERGE primary key autocreame, dpname text, status text, logtime text, type text);";
         db.execSQL(sql);
     }
 
@@ -39,12 +39,13 @@ public class SQLHelper extends SQLiteOpenHelper
         return cursor;
     }
 
-    public void insert(String dpname, String status, String time){
+    public void insert(String dpname, String status, String time,String type){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("dpname",dpname);
         cv.put("status",status);
         cv.put("logtime",time);
+        cv.put("type",type);
         db.insert("status",null,cv);
     }
 
@@ -54,9 +55,10 @@ public class SQLHelper extends SQLiteOpenHelper
         List<StatusData> l = new ArrayList<>();
         while(result.moveToNext()){
             StatusData data = new StatusData();
-            data.DPNAme=result.getString(result.getColumnIndex("dpname"));
+            data.DPName=result.getString(result.getColumnIndex("dpname"));
             data.Status=result.getString(result.getColumnIndex("status"));
             data.Time=result.getString(result.getColumnIndex("logtime"));
+            data.Type=result.getString(result.getColumnIndex("type"));
             l.add(data);
         }
 

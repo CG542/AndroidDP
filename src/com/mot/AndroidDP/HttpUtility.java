@@ -85,6 +85,31 @@ public class HttpUtility {
         PostRequest(url, para);
     }
 
+    public static List<StatusData> QueryDPStatus(){
+        List<StatusData> l = new ArrayList<>();
+        String url = urlBase+"QueryDPStatus";
+        String time = "2016-06-12 18:50:32";
+        String para = String.format("loginname=%s&password=%s&dpname=%s&time=%s"
+                , GlobalPara.UserName, GlobalPara.PSW,"",time);
+
+        String webResponse = GetRequest(url,para);
+        try{
+            JSONObject js = new JSONObject(webResponse);
+            JSONArray jsArray = js.optJSONArray("dpStatusEntity");
+            for(int i=0;i<jsArray.length();i++){
+                JSONObject temp = (JSONObject)jsArray.get(i);
+                StatusData data=new StatusData();
+                data.DPName=temp.optString("DPName");
+                data.Status= temp.optString("status");
+                data.Time=temp.getString("reporttime");
+                l.add(data);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return l;
+    }
+
     static String resultStr = "";
 
     private static String GetRequest(String url, String para) {

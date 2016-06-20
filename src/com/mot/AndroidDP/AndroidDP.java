@@ -60,7 +60,7 @@ public class AndroidDP extends Activity {
         Intent intent = new Intent(AndroidDP.this,StatusListener.class);
         registerBroadcastReceiver();
         startService(intent);
-
+        HttpUtility.QueryDPStatus();
     }
 
     private void registerBroadcastReceiver(){
