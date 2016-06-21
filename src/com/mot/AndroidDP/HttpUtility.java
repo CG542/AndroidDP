@@ -29,39 +29,47 @@ public class HttpUtility {
         return result;
     }
 
-    public static List<String> GetAllDPNames(){
-        String url=urlBase+"GetAllDPNames";
-        String para=String.format("loginname=%s&password=%s", GlobalPara.UserName, GlobalPara.PSW);
+    public static List<String> GetAllDPNames() {
+        String url = urlBase + "GetAllDPNames";
+        String para = String.format("loginname=%s&password=%s", GlobalPara.UserName, GlobalPara.PSW);
 
-        List<String> list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
 
         String result = GetRequest(url, para);
         try {
-            JSONObject js=new JSONObject(result);
-            JSONArray jsArray=js.optJSONArray("DP");
-            for (int i=0;i<jsArray.length();i++){
-                JSONObject temp = (JSONObject)jsArray.get(i);
+            JSONObject js = new JSONObject(result);
+            JSONArray jsArray = js.optJSONArray("DP");
+            if (jsArray == null) {
+                jsArray = new JSONArray();
+                jsArray.put(js.optJSONObject("DP"));
+            }
+            for (int i = 0; i < jsArray.length(); i++) {
+                JSONObject temp = (JSONObject) jsArray.get(i);
                 list.add(temp.optString("name"));
             }
-           System.out.print(js.length());
+            System.out.print(js.length());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return list;
     }
 
-    public static List<String> GetAllSettings(){
-        String url=urlBase+"GetAllSettings";
-        String para=String.format("loginname=%s&password=%s", GlobalPara.UserName, GlobalPara.PSW);
+    public static List<String> GetAllSettings() {
+        String url = urlBase + "GetAllSettings";
+        String para = String.format("loginname=%s&password=%s", GlobalPara.UserName, GlobalPara.PSW);
 
-        List<String> list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
 
         String result = GetRequest(url, para);
         try {
-            JSONObject js=new JSONObject(result);
-            JSONArray jsArray=js.optJSONArray("settingEntity");
-            for (int i=0;i<jsArray.length();i++){
-                JSONObject temp = (JSONObject)jsArray.get(i);
+            JSONObject js = new JSONObject(result);
+            JSONArray jsArray = js.optJSONArray("settingEntity");
+            if (jsArray == null) {
+                jsArray = new JSONArray();
+                jsArray.put(js.optJSONObject("settingEntity"));
+            }
+            for (int i = 0; i < jsArray.length(); i++) {
+                JSONObject temp = (JSONObject) jsArray.get(i);
                 list.add(temp.optString("profilename"));
             }
             System.out.print(js.length());
@@ -71,40 +79,48 @@ public class HttpUtility {
         return list;
     }
 
-    public static void SetDPConfig(String dpName,String profileName){
-        String url=urlBase+"SetDPConfig";
+    public static void SetDPConfig(String dpName, String profileName) {
+        String url = urlBase + "SetDPConfig";
         String para = String.format("loginname=%s&password=%s&dpname=%s&profilename=%s"
-                , GlobalPara.UserName, GlobalPara.PSW,dpName,profileName);
+                , GlobalPara.UserName, GlobalPara.PSW, dpName, profileName);
         PostRequest(url, para);
     }
 
-    public static void UploadSetting(String profileName,String setting){
-        String url=urlBase+"UploadSetting";
+    public static void UploadSetting(String profileName, String setting) {
+        String url = urlBase + "UploadSetting";
         String para = String.format("loginname=%s&password=%s&profilename=%s&setting=%s"
-                , GlobalPara.UserName, GlobalPara.PSW,profileName,setting);
+                , GlobalPara.UserName, GlobalPara.PSW, profileName, setting);
         PostRequest(url, para);
     }
 
-    public static List<StatusData> QueryDPStatus(){
+    public static List<StatusData> QueryDPStatus(String time) {
         List<StatusData> l = new ArrayList<>();
-        String url = urlBase+"QueryDPStatus";
-        String time = "2016-06-12 18:50:32";
-        String para = String.format("loginname=%s&password=%s&dpname=%s&time=%s"
-                , GlobalPara.UserName, GlobalPara.PSW,"",time);
+        String url = urlBase + "QueryDPStatus";
+        time = time.replace(" ", "%20");
+        String para = String.format("loginname=%s&password=%s&time=%s"
+                , GlobalPara.UserName, GlobalPara.PSW, time);
 
-        String webResponse = GetRequest(url,para);
-        try{
+        String webResponse = GetRequest(url, para);
+        try {
             JSONObject js = new JSONObject(webResponse);
             JSONArray jsArray = js.optJSONArray("dpStatusEntity");
-            for(int i=0;i<jsArray.length();i++){
-                JSONObject temp = (JSONObject)jsArray.get(i);
-                StatusData data=new StatusData();
-                data.DPName=temp.optString("DPName");
-                data.Status= temp.optString("status");
-                data.Time=temp.getString("reporttime");
+
+            if (jsArray == null) {
+                jsArray = new JSONArray();
+                jsArray.put(js.optJSONObject("dpStatusEntity"));
+            }
+
+            for (int i = 0; i < jsArray.length(); i++) {
+                JSONObject temp = (JSONObject) jsArray.get(i);
+                StatusData data = new StatusData();
+                data.DPName = temp.optString("DPName");
+                data.Status = temp.optString("status");
+                data.Time = temp.getString("reporttime");
+                data.Type=temp.getString("type");
                 l.add(data);
             }
-        }catch (JSONException e){
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return l;

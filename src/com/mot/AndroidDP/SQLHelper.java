@@ -15,15 +15,16 @@ import java.util.List;
 public class SQLHelper extends SQLiteOpenHelper
 {
     private final static String DBNAme="DP.db";
-    private final static int DBVer = 1;
+    private final static int DBVer = 2;
     public SQLHelper(Context context){
         super(context,DBNAme,null,DBVer);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE status (id INTERGE primary key autocreame, dpname text, status text, logtime text, type text);";
+        String sql = "CREATE TABLE status (id INTEGER primary key autoincrement, dpname TEXT, status TEXT, logtime TEXT, type TEXT);";
         db.execSQL(sql);
+
     }
 
     @Override
@@ -31,6 +32,7 @@ public class SQLHelper extends SQLiteOpenHelper
         String sql = "Drop TABLE IF EXISTS status";
         db.execSQL(sql);
         onCreate(db);
+
     }
 
     public Cursor select(){
@@ -40,18 +42,35 @@ public class SQLHelper extends SQLiteOpenHelper
     }
 
     public void insert(String dpname, String status, String time,String type){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put("dpname",dpname);
-        cv.put("status",status);
-        cv.put("logtime",time);
-        cv.put("type",type);
-        db.insert("status",null,cv);
+        if(!isExist(dpname,status,time)) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put("dpname", dpname);
+            cv.put("status", status);
+            cv.put("logtime", time);
+            cv.put("type", type);
+            db.insert("status", null, cv);
+            db.close();
+        }
     }
 
-    public List<StatusData> query(int num){
-        String sql = "select dpname, status, logtime FROM status order by logtime desc";
-        Cursor result = this.getReadableDatabase().rawQuery(sql, new String[]{});
+    private boolean isExist(String dpname,String status,String time){
+        boolean result =false;
+        String sql = String.format( "select count(*) FROM status where dpname='%s' and status='%s' and logtime='%s'",dpname,status,time);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor  c= db.rawQuery(sql,new String[]{});
+        if(c.moveToNext()){
+            result=c.getInt(0)>0;
+        }
+        db.close();
+        return result;
+    }
+
+    public List<StatusData> query(){
+        String sql = "select * FROM status order by logtime desc";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery(sql, new String[]{});
         List<StatusData> l = new ArrayList<>();
         while(result.moveToNext()){
             StatusData data = new StatusData();
@@ -61,7 +80,7 @@ public class SQLHelper extends SQLiteOpenHelper
             data.Type=result.getString(result.getColumnIndex("type"));
             l.add(data);
         }
-
+        db.close();
         return l;
     }
 }

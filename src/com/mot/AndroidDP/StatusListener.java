@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,8 +54,21 @@ public class StatusListener extends Service {
     }
 
     private void ReceiveData(){
-        SendNotification("abcd");
-        SendStatusChangedBroadcast();
+        String time = "2016-06-12 18:50:32";
+        List<StatusData> dataList = HttpUtility.QueryDPStatus(time);
+        if(dataList.size()>0) {
+            SQLHelper sqlHeler = new SQLHelper(getApplicationContext());
+            for(StatusData data : dataList) {
+
+                sqlHeler.insert(data.DPName,data.Status,data.Time,data.Type);
+
+                if(data.Type.equals("Warning")) {
+                    SendNotification(data.DPName+":"+data.Status);
+                }
+            }
+
+            SendStatusChangedBroadcast();
+        }
     }
 
     private void SendStatusChangedBroadcast(){

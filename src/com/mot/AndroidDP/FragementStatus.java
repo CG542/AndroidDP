@@ -11,6 +11,7 @@ import android.widget.SimpleAdapter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
 
 /**
@@ -18,6 +19,7 @@ import java.util.Timer;
  */
 public class FragementStatus extends Fragment {
     ListView statusList;
+    SQLHelper sqlHelper;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.status, container, false);
@@ -26,18 +28,19 @@ public class FragementStatus extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        sqlHelper=new SQLHelper(this.getActivity().getApplicationContext());
         statusList=(ListView)getView().findViewById(R.id.listView);
         LoadData();
     }
-    static int n=0;
+
     public void LoadData(){
         ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
-        for(int i=0;i<4;i++)
+        List<StatusData> dataList =sqlHelper.query();
+        for(StatusData data : dataList)
         {
             HashMap<String, String> map = new HashMap<String, String>();
-            map.put("ItemTitle", "This is Title.....");
-            String temp =Integer.toString(n++);
-            map.put("ItemText", temp);
+            map.put("ItemTitle", data.DPName+":"+data.Status);
+            map.put("ItemText", data.Time);
             mylist.add(map);
         }
         SimpleAdapter mSchedule = new SimpleAdapter(getView().getContext(), mylist, R.layout.my_listitem, new String[] {"ItemTitle", "ItemText"}, new int[] {R.id.ItemTitle,R.id.ItemText});
