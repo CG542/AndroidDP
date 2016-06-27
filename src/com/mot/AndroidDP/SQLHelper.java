@@ -83,4 +83,11 @@ public class SQLHelper extends SQLiteOpenHelper
         db.close();
         return l;
     }
+
+    public void clearLocalDB(){
+        String sql = "Delete from status";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(sql);
+        db.close();
+    }
 }

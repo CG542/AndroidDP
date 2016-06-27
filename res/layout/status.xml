@@ -3,11 +3,31 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+              android:gravity="right"
               android:background="#ffefebe7">
 
-
+<Button android:layout_width="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/clearBut"
+        android:textColor="@android:color/background_dark"
+        android:text="Clear"
+        android:gravity="center"
+/>
+    <View style="@style/spilte_line_style"/>
+    <FrameLayout
+            android:id="@+id/username_layout"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/clearBut"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
     <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/listView"/>
+</FrameLayout>
+
 </LinearLayout>

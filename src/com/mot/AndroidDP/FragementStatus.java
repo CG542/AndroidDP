@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -20,6 +21,7 @@ import java.util.Timer;
 public class FragementStatus extends Fragment {
     ListView statusList;
     SQLHelper sqlHelper;
+    Button clearBut;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.status, container, false);
@@ -28,9 +30,18 @@ public class FragementStatus extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        clearBut=(Button)getView().findViewById(R.id.clearBut);
         sqlHelper=new SQLHelper(this.getActivity().getApplicationContext());
         statusList=(ListView)getView().findViewById(R.id.listView);
         LoadData();
+
+        clearBut.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                ClearLocalData();
+            }
+        });
     }
 
     public void LoadData(){
@@ -45,5 +56,10 @@ public class FragementStatus extends Fragment {
         }
         SimpleAdapter mSchedule = new SimpleAdapter(getView().getContext(), mylist, R.layout.my_listitem, new String[] {"ItemTitle", "ItemText"}, new int[] {R.id.ItemTitle,R.id.ItemText});
         statusList.setAdapter(mSchedule);
+    }
+
+    private  void ClearLocalData(){
+        sqlHelper.clearLocalDB();
+        LoadData();
     }
 }
