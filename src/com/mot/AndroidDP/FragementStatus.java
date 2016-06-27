@@ -39,8 +39,8 @@ public class FragementStatus extends Fragment {
         for(StatusData data : dataList)
         {
             HashMap<String, String> map = new HashMap<String, String>();
-            map.put("ItemTitle", data.DPName+":"+data.Status);
-            map.put("ItemText", data.Time);
+            map.put("ItemTitle", data.Status);
+            map.put("ItemText", data.DPName+":"+data.Time);
             mylist.add(map);
         }
         SimpleAdapter mSchedule = new SimpleAdapter(getView().getContext(), mylist, R.layout.my_listitem, new String[] {"ItemTitle", "ItemText"}, new int[] {R.id.ItemTitle,R.id.ItemText});

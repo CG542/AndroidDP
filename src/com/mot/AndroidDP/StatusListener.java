@@ -1,10 +1,14 @@
 package com.mot.AndroidDP;
 
 import android.app.*;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,7 +41,7 @@ public class StatusListener extends Service {
                 //发送广播
                 ReceiveData();
             }
-        }, 1000,1000);
+        }, 1000,3000);
 
     }
 
@@ -53,10 +57,33 @@ public class StatusListener extends Service {
         return null;
     }
 
+    private String GetLastTime(){
+        SharedPreferences sp = getSharedPreferences("dp", Context.MODE_PRIVATE);
+        String time = sp.getString("QueryTime","");
+        if(time.isEmpty()){
+            time ="2016-06-12 18:50:32";
+        }
+        return time;
+    }
+
+    private void StoreLastTime(String time){
+        SharedPreferences sp = getSharedPreferences("dp",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sp.edit();
+        editor.putString("QueryTime",time);
+        editor.commit();
+    }
+    private String GetCurrentTime(){
+        SimpleDateFormat formatter    =  new   SimpleDateFormat    ("yyyy-MM-dd HH:mm:ss");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str  = formatter.format(curDate);
+        return str;
+    }
     private void ReceiveData(){
-        String time = "2016-06-12 18:50:32";
+        String time = GetLastTime();
+        String currenttime=GetCurrentTime();
         List<StatusData> dataList = HttpUtility.QueryDPStatus(time);
         if(dataList.size()>0) {
+            StoreLastTime(currenttime);
             SQLHelper sqlHeler = new SQLHelper(getApplicationContext());
             for(StatusData data : dataList) {
 
@@ -79,6 +106,7 @@ public class StatusListener extends Service {
 
     private void SendNotification(String msg){
         Notification no = new Notification(R.drawable.ic_launcher,msg,System.currentTimeMillis());
+        no.defaults=Notification.DEFAULT_ALL;
         Intent intent=new Intent(this,FragementStatus.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
 

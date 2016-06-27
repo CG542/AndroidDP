@@ -15,7 +15,7 @@ import java.util.List;
 public class SQLHelper extends SQLiteOpenHelper
 {
     private final static String DBNAme="DP.db";
-    private final static int DBVer = 2;
+    private final static int DBVer = 3;
     public SQLHelper(Context context){
         super(context,DBNAme,null,DBVer);
     }
